@@ -11,7 +11,7 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 5001 available to the world outside this container
-EXPOSE 5002
+EXPOSE 5001
 
 # Define environment variable
 # ENV NAME World
