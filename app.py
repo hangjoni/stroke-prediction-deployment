@@ -45,8 +45,6 @@ def predict():
     return df.to_json()
 
 def _predict_helper(json_data):
-    print('json_data')
-    print(json_data)
     # json_data could be dictionary or list of dictionary
     if isinstance(json_data, list):
         query = pd.DataFrame(json_data)
