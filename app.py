@@ -13,11 +13,11 @@ from utils import *
 with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/predict')
+@app.route('/predict', methods=['POST'])
 def predict():
     json_ = request.get_json()
 

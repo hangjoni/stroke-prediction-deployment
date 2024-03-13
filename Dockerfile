@@ -17,5 +17,4 @@ EXPOSE 5002
 # ENV NAME World
 
 # Run app.py when the container launches
-# CMD ["python", "app.py"]
-CMD ["sleep", "3600"]
+CMD ["python", "app.py"]
