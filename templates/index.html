@@ -12,25 +12,25 @@
         <div class="mb-3">
             <label class="form-label">Gender</label>
             <select class="form-control" name="gender" placeholder="Enter you Gender" required>
-                <option value="1" selected>
+                <option value="0" {{'selected' if form_data.get('gender') == '0' else ''}}>
                     Male
                 </option>
-                <option value="0">
+                <option value="1" {{'selected' if form_data.get('gender') == '1' else ''}}>
                     Female
                 </option>
             </select>
         </div>
         <div class="mb-3">
             <label class="form-label" for="age">Age</label>
-            <input type="number" id="age" name="age" min="0" max="120" step="1" value="20">
+            <input type="number" id="age" name="age" min="0" max="120" step="1" value={{form_data.get('age', '20')}}>
         </div>
         <div class="mb-3">
             <label class="form-label" for="hypertension">Hypertension</label>
             <select class="form-control" name="hypertension" required>
-                <option value="1">
+                <option value="1" {{'selected' if form_data.get('hypertension') == '1' else ''}}>
                     Yes
                 </option>
-                <option value="0" selected>
+                <option value="0" {{'selected' if form_data.get('hypertension') == '0' else ''}}>
                     No
                 </option>
             </select>
@@ -38,10 +38,10 @@
         <div class="mb-3">
             <label class="form-label" for="heart_disease">Heart Disease</label>
             <select class="form-control" name="heart_disease" required>
-                <option value="1">
+                <option value="1" {{'selected' if form_data.get('heart_disease') == '1' else ''}}>
                     Yes
                 </option>
-                <option value="0" selected>
+                <option value="0" {{'selected' if form_data.get('heart_disease') == '0' else ''}}>
                     No
                 </option>
             </select>
@@ -49,30 +49,30 @@
         <div class="mb-3">
             <label class="form-label" for="work_type">Work Type</label>
             <select class="form-control" name="work_type" placeholder="Work Type" required>
-                <option value="0">
+                <option value="0" {{'selected' if form_data.get('work_type') == '0' else ''}}>
                     0
                 </option>
-                <option value="1">
+                <option value="1" {{'selected' if form_data.get('work_type') == '1' else ''}}>
                     1
                 </option>
-                <option value="2">
+                <option value="2" {{'selected' if form_data.get('work_type') == '2' else ''}}>
                     2
                 </option>
-                <option value="254">
+                <option value="254" {{'selected' if form_data.get('work_type') == '254' else ''}}>
                     254
                 </option>
-                <option value="255">
+                <option value="255" {{'selected' if form_data.get('work_type') == '255' else ''}}>
                     255
                 </option>
             </select>
         </div>
         <div class="mb-3">
             <label class="form-label" for="avg_glucose_level">Glucose Level</label>
-            <input type="number" id="avg_glucose_level" name="avg_glucose_level" min="50" max="300" value="100">
+            <input type="number" id="avg_glucose_level" name="avg_glucose_level" min="50" max="300" value={{form_data.get('avg_glucose_level', '100')}}>
         </div>
         <div class="mb-3">
             <label class="form-label" for="bmi">BMI</label>
-            <input type="number" id="bmi" name="bmi" min="10" max="100" value="20">
+            <input type="number" id="bmi" name="bmi" min="10" max="100" value={{form_data.get('bmi', '20')}}>
         </div>
         
         <div class="mb-3">
@@ -80,7 +80,7 @@
         </div>
     </form>
     <h2>
-       Your risk of stroke is {{prob}}
+       Your risk of stroke when you are at this age (not cummulative) is {{form_data.get('prob','')}}
     </h2>
    <body>
 </html>

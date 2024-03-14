@@ -1,9 +1,10 @@
-from flask import Flask, request, json, render_template
+from flask import Flask, request, render_template, url_for, redirect, session
 import pandas as pd
 import pickle
 
 
 app = Flask(__name__)
+app.secret_key= 'secret'
 
 # dependencies
 from utils import *
@@ -16,9 +17,7 @@ with open('model.pkl', 'rb') as file:
 # end point to serve front end prediction with one input
 @app.route('/', methods=['GET', 'POST'])
 def predict_one_datapoint():
-    if request.method=='GET':
-        return render_template('index.html')
-    else:
+    if request.method=='POST':
         data = {
             'gender': int(request.form.get('gender')),
             'age': int(request.form.get('age')),
@@ -28,10 +27,18 @@ def predict_one_datapoint():
             'avg_glucose_level': float(request.form.get('avg_glucose_level')),
             'bmi': float(request.form.get('bmi'))
         }
+        # data = request.form.to_dict()
         preds, probs = _predict_helper(data)
         pred, prob = preds[0], probs[0]
 
-        return render_template('index.html', pred=pred, prob=prob)
+        data['pred'] = str(pred)
+        data['prob'] = str(prob)
+        session['form_data'] = data
+
+        return redirect(url_for('predict_one_datapoint'))
+    
+    form_data = session.get('form_data', {})
+    return render_template('index.html', form_data=form_data)
 
 # end point for batch prediction
 @app.route('/predict', methods=['POST'])
